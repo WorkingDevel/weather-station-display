@@ -16,8 +16,8 @@
     "typescript": "^3.7.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "./tools/env-setup.sh && cp env-config.js ./public/ && react-scripts start",
+    "build": "./tools/env-setup.sh && cp env-config.js ./public/ && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
