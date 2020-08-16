@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { ThemeProvider } from '@material-ui/styles';
 import Box from '@material-ui/core/Box';
 import theme from '../styles/theme';
-import { Grid, Tooltip, Button, withStyles, Theme } from '@material-ui/core';
+import { Grid, Tooltip, Button, withStyles, Theme, CssBaseline } from '@material-ui/core';
 import TemperatureDigital from '../components/TemperatureDigital';
 import { SourceDaily } from '../domain/source-json';
 
@@ -14,11 +14,11 @@ interface HomePageProps {
 
 type HomePageState = {
   isLoaded: boolean,
+  lastFetched?: Date,
   data?: SourceDaily,
   time: Date,
-  error: any,
+  error?: any,
 }
-
 
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
@@ -32,9 +32,12 @@ const HtmlTooltip = withStyles((theme: Theme) => ({
 
 class HomePage extends Component<HomePageProps, HomePageState> {
 
-  // Before the component mounts, we initialise our state
-  UNSAFE_componentWillMount() {
-    this.tick();
+  constructor(props: HomePageProps) {
+    super(props);
+    this.state = {
+      isLoaded: false,
+      time: new Date()
+    };
   }
 
   componentDidMount() {
@@ -43,7 +46,8 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     this.getData();
 
     // Now we need to make it run at a specified interval
-    setInterval(() => this.tick(), 1000); // runs every 5 seconds.
+    setInterval(() => this.tick(), 1000);
+    setInterval(() => this.getData(), 60000);
   }
 
   getData = () => {
@@ -52,10 +56,11 @@ class HomePage extends Component<HomePageProps, HomePageState> {
       .then(response => response.json())
       .then(
         // handle the result
-        (result) => {
+        (result: SourceDaily) => {
           console.info(result);
           this.setState({
             isLoaded: true,
+            lastFetched: new Date(),
             data: result
           });
         },
@@ -64,12 +69,13 @@ class HomePage extends Component<HomePageProps, HomePageState> {
         (error) => {
           console.error(error);
           this.setState({
-            isLoaded: true,
+            isLoaded: false,
             error
           })
         },
       )
   }
+
 
   // The tick function sets the current state. TypeScript will let us know
   // which ones we are allowed to set.
@@ -91,6 +97,7 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     if (this.state.data === null) {
       return (
         <ThemeProvider theme={theme}>
+          <CssBaseline />
           <Container maxWidth="sm">
             <Box my={4}>
               <Typography variant="h4" component="h1" gutterBottom>Weather Overview</Typography>
@@ -102,14 +109,15 @@ class HomePage extends Component<HomePageProps, HomePageState> {
       const data = this.state.data!!
       return (
         <ThemeProvider theme={theme}>
-          <Container maxWidth="sm">
+          <CssBaseline />
+          <Container maxWidth="md">
             <Box my={4}>
               <Typography variant="h4" component="h1" gutterBottom>Weather Overview</Typography>
               <Typography variant="h5" component="h2" gutterBottom>
                 {data?.location}
               </Typography>
               <Typography variant="h6" component="p" gutterBottom>
-                Station Time: {data?.time}
+                Station Time: {data?.time}, Last Fetch Time: {this.state.lastFetched?.toISOString()}
               </Typography>
               <HtmlTooltip title={
                 <React.Fragment>
@@ -119,12 +127,15 @@ class HomePage extends Component<HomePageProps, HomePageState> {
 
           Timer: {this.state.time.toISOString()}
             </Box>
-            <Grid container spacing={3}>
+            <Grid container spacing={1}>
               {data?.stats.map((stat) => {
                 return (
-                  <Grid item xs={3}>
-                    <TemperatureDigital value={stat.currentValue} title={stat.label} unit={stat.unit} />
-                  </Grid>)
+                  <React.Fragment key={stat.name}>
+                    <Grid item xs={2}>
+                      <TemperatureDigital value={stat.currentValue} title={stat.label} unit={stat.unit} />
+                    </Grid>
+                  </React.Fragment>
+                )
               })}
             </Grid>
           </Container>
