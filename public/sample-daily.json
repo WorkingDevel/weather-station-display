@@ -1,0 +1,294 @@
+{
+  "location": "DreamWeather, Berlin",
+  "time": "2020-08-16T16:25:00+0200",
+  "lat": "56&deg; 31.03' N",
+  "lon": "013&deg; 20.53' E",
+  "alt": "10 meters",
+  "hardware": "GW1000",
+  "uptime": "0 days, 0 hours, 2 minutes",
+  "serverUptime": "15 days, 19 hours, 46 minutes",
+  "weewxVersion": "4.1.1",
+  "stats": [
+    {
+      "name": "inTemp",
+      "label": "Inside Temperature",
+      "unit": "°C",
+      "type": "TEMP_IN",
+      "currentValue": "27.5",
+      "maxValue": "27.7",
+      "maxTime": "2020-08-16T16:07:03+0200",
+      "minValue": "25.1",
+      "minTime": "2020-08-16T08:35:35+0200",
+      "avgDay": "26.0"
+    },
+    {
+      "name": "outTemp",
+      "label": "Outside Temperature",
+      "unit": "°C",
+      "type": "TEMP_OUT",
+      "currentValue": "32.6",
+      "maxValue": "33.6",
+      "maxTime": "2020-08-16T16:10:03+0200",
+      "minValue": "18.1",
+      "minTime": "2020-08-16T06:23:09+0200",
+      "avgDay": "24.3"
+    },
+    {
+      "name": "windchill",
+      "label": "Wind Chill",
+      "unit": "°C",
+      "type": "WIND_CHILL",
+      "currentValue": "32.6",
+      "minValue": "18.1",
+      "minTime": "2020-08-16T06:23:09+0200",
+      "avgDay": "24.3"
+    },
+    {
+      "name": "windSpeed",
+      "label": "Wind Speed",
+      "unit": " m/s",
+      "type": "WIND_SPEED",
+      "currentValue": "0.6",
+      "maxValue": "2.0",
+      "maxTime": "2020-08-16T10:59:03+0200",
+      "avgDay": "0.1",
+      "rms": "0.2",
+      "additional": [
+        {
+          "name": "windVecAvg",
+          "value": "0.1 m/s"
+        },
+        {
+          "name": "windVecDir",
+          "value": "40°"
+        }
+      ]
+    },
+    {
+      "name": "windDir",
+      "label": "Wind Direction",
+      "unit": "°",
+      "type": "WIND_DIR",
+      "currentValue": "235",
+      "avgDay": "107"
+    },
+    {
+      "name": "windDirText",
+      "label": "wind",
+      "type": "WIND_DIR_TEXT",
+      "currentValue": "SW"
+    },
+    {
+      "name": "windGust",
+      "label": "Gust Speed",
+      "unit": " m/s",
+      "type": "WIND_GUST",
+      "currentValue": "1.5",
+      "avgDay": "0.5"
+    },
+    {
+      "name": "windGustDir",
+      "label": "Gust Direction",
+      "unit": "°",
+      "type": "WIND_GUST_DIR",
+      "currentValue": "236",
+      "maxValue": "210°"
+    },
+    {
+      "name": "heatindex",
+      "label": "Heat Index",
+      "unit": "°C",
+      "type": "HEAT_INDEX",
+      "currentValue": "32.6",
+      "maxValue": "33.6",
+      "maxTime": "2020-08-16T16:10:03+0200",
+      "minValue": "18.1",
+      "minTime": "2020-08-16T06:23:09+0200",
+      "avgDay": "24.3"
+    },
+    {
+      "name": "dewpoint",
+      "label": "Dew Point",
+      "unit": "°C",
+      "type": "DEWPOINT",
+      "currentValue": "7.8",
+      "maxValue": "15.8",
+      "maxTime": "2020-08-16T00:54:02+0200",
+      "minValue": "7.5",
+      "minTime": "2020-08-16T16:23:19+0200",
+      "avgDay": "13.2"
+    },
+    {
+      "name": "outHumidity",
+      "label": "Humidity",
+      "unit": "%",
+      "type": "HUMIDITY_OUT",
+      "currentValue": "22",
+      "maxValue": "80",
+      "maxTime": "2020-08-16T04:18:45+0200",
+      "minValue": "21",
+      "minTime": "2020-08-16T15:55:00+0200",
+      "avgDay": "56"
+    },
+    {
+      "name": "inHumidity",
+      "label": "Inside Humidity",
+      "unit": "%",
+      "type": "HUMIDITY_IN",
+      "currentValue": "58",
+      "maxValue": "60",
+      "maxTime": "2020-08-16T13:11:29+0200",
+      "minValue": "52",
+      "minTime": "2020-08-16T09:18:44+0200",
+      "avgDay": "57"
+    },
+    {
+      "name": "barometer",
+      "label": "Barometer",
+      "unit": " mbar",
+      "type": "BAROMETER",
+      "currentValue": "1009.3",
+      "maxValue": "1012.0",
+      "maxTime": "2020-08-16T08:18:32+0200",
+      "minValue": "1009.1",
+      "minTime": "2020-08-16T15:53:00+0200",
+      "avgDay": "1011.0"
+    },
+    {
+      "name": "barometerTrendDelta",
+      "label": "time_delta",
+      "unit": " mbar",
+      "type": "BAROMETER_TREND",
+      "currentValue": "-1.2",
+      "timePeriod": "3 hours"
+    },
+    {
+      "name": "rainRate",
+      "label": "Rain Rate",
+      "unit": " mm/h",
+      "type": "RAIN_RATE",
+      "currentValue": "0.0",
+      "sumDay": "0.0",
+      "maxValue": "0.0",
+      "maxTime": "2020-08-16T00:00:52+0200",
+      "avgDay": "0.0"
+    }
+    ,
+    {
+      "name": "extraTemp1",
+      "label": "Temperature Arbeitszimmer",
+      "unit": "°C",
+      "type": "TEMP_IN",
+      "currentValue": "27.0",
+      "maxValue": "27.0",
+      "maxTime": "2020-08-16T16:23:19+0200",
+      "minValue": "24.2",
+      "minTime": "2020-08-16T06:59:16+0200",
+      "avgDay": "25.4"
+    }
+    ,
+    {
+      "name": "extraTemp2",
+      "label": "Temperature Schlafzimmer",
+      "unit": "°C",
+      "type": "TEMP_IN",
+      "currentValue": "26.5",
+      "maxValue": "27.0",
+      "maxTime": "2020-08-16T16:23:19+0200",
+      "minValue": "24.2",
+      "minTime": "2020-08-16T06:59:16+0200",
+      "avgDay": "25.4"
+    }
+    ,
+    {
+      "name": "extraTemp3",
+      "label": "Temperature Kinderzimmer",
+      "unit": "°C",
+      "type": "TEMP_IN",
+      "currentValue": "25.8",
+      "maxValue": "26.0",
+      "maxTime": "2020-08-16T15:54:00+0200",
+      "minValue": "23.1",
+      "minTime": "2020-08-16T06:49:14+0200",
+      "avgDay": "24.7"
+    }
+    ,
+    {
+      "name": "extraTemp4",
+      "label": "Temperature Outside 2",
+      "unit": "°C",
+      "type": "TEMP_IN",
+      "currentValue": "28.8",
+      "maxValue": "48.0",
+      "maxTime": "2020-08-16T12:14:17+0200",
+      "minValue": "19.5",
+      "minTime": "2020-08-16T06:30:10+0200",
+      "avgDay": "26.5"
+    }
+    ,
+    {
+      "name": "extraHumid1",
+      "label": "Humidity Arbeitszimmer",
+      "unit": "%",
+      "type": "HUMIDITY_IN",
+      "currentValue": "51",
+      "maxValue": "57",
+      "maxTime": "2020-08-16T00:46:01+0200",
+      "minValue": "41",
+      "minTime": "2020-08-16T11:57:14+0200",
+      "avgDay": "53"
+    }
+    ,
+    {
+      "name": "extraHumid2",
+      "label": "Humidity Schlafzimmer",
+      "unit": "%",
+      "type": "HUMIDITY_IN",
+      "currentValue": "56",
+      "maxValue": "59",
+      "maxTime": "2020-08-16T16:04:02+0200",
+      "minValue": "39",
+      "minTime": "2020-08-16T11:53:14+0200",
+      "avgDay": "54"
+    }
+    ,
+    {
+      "name": "extraHumid3",
+      "label": "Humidity Kinderzimmer",
+      "unit": "%",
+      "type": "HUMIDITY_IN",
+      "currentValue": "44%",
+      "maxValue": "69",
+      "maxTime": "2020-08-16T15:16:53+0200",
+      "minValue": "44",
+      "minTime": "2020-08-16T16:24:19+0200",
+      "avgDay": "59"
+    }
+    ,
+    {
+      "name": "extraHumid4",
+      "label": "Humidity Outside 2",
+      "unit": "%",
+      "type": "HUMIDITY_IN",
+      "currentValue": "27",
+      "maxValue": "72",
+      "maxTime": "2020-08-16T05:52:03+0200",
+      "minValue": "11",
+      "minTime": "2020-08-16T11:58:15+0200",
+      "avgDay": "49"
+    }
+    ,
+    {
+      "name": "UV",
+      "label": "UV Index",
+      "unit": "",
+      "type": "UV",
+      "currentValue": "4.0",
+      "maxValue": "6.0",
+      "maxTime": "2020-08-16T11:28:09+0200",
+      "minValue": "0.0",
+      "minTime": "2020-08-16T00:00:52+0200",
+      "avgDay": "1.9"
+    }
+  ]
+}
