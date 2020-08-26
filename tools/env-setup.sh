@@ -2,11 +2,11 @@
 
 OUTPUT_FILE=${1:-./env-config.js}
 FOR_ENV=${ENV:-local}
-INPUT_FILE=".env.${FOR_ENV}"
+INPUT_FILE=".env.${FOR_ENV}.dist"
 
 if [[ ! -e ${INPUT_FILE} ]]; then
-  echo "${INPUT_FILE} is missing. Using .env.docker"
-  INPUT_FILE=.env.docker
+  echo "${INPUT_FILE} is missing. Please create it."
+  exit 1
 fi
 
 # Recreate config file
