@@ -7,8 +7,11 @@ import theme from '../styles/theme';
 import { Grid, Tooltip, Button, withStyles, Theme, CssBaseline } from '@material-ui/core';
 import TemperatureDigital from '../components/TemperatureDigital';
 import { SourceDaily } from '../domain/source-json';
+import { ConnectedProps, connect } from 'react-redux';
+import { timeSlice } from '../store/time/slice';
+import { RootState } from '../store';
 
-interface HomePageProps {
+interface HomePageProps extends PropsFromRedux {
   dataUrl: URL
 }
 
@@ -16,13 +19,27 @@ type HomePageState = {
   isLoaded: boolean,
   lastFetched?: Date,
   data?: SourceDaily,
-  time: Date,
   error?: any,
 }
 
+const mapState = (state: RootState) => ({
+  stationTime: state.time.stationTime,
+  localTime: state.time.displayTime
+})
+
+const mapDispatch = {
+  setTime: (time: Date) => timeSlice.actions.setLocalTime(time.toISOString())
+}
+
+type StateProps = ReturnType<typeof mapState>
+type DispatchProps = typeof mapDispatch
+
+const connector = connect(mapState, mapDispatch)
+type PropsFromRedux = ConnectedProps<typeof connector>
+
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
-    backgroundColor: '#f5f5f9',
+    backgroundColor: '#555555',
     color: 'rgba(0, 0, 0, 0.87)',
     maxWidth: 220,
     fontSize: theme.typography.pxToRem(12),
@@ -35,8 +52,7 @@ class HomePage extends Component<HomePageProps, HomePageState> {
   constructor(props: HomePageProps) {
     super(props);
     this.state = {
-      isLoaded: false,
-      time: new Date()
+      isLoaded: false
     };
   }
 
@@ -46,7 +62,6 @@ class HomePage extends Component<HomePageProps, HomePageState> {
     this.getData();
 
     // Now we need to make it run at a specified interval
-    setInterval(() => this.tick(), 1000);
     setInterval(() => this.getData(), 60000);
   }
 
@@ -76,15 +91,6 @@ class HomePage extends Component<HomePageProps, HomePageState> {
       )
   }
 
-
-  // The tick function sets the current state. TypeScript will let us know
-  // which ones we are allowed to set.
-  tick() {
-    this.setState({
-      time: new Date()
-    });
-  }
-
   stateText() {
     if (this.state.isLoaded) {
       return JSON.stringify(this.state.data!!, null, 2)
@@ -94,6 +100,7 @@ class HomePage extends Component<HomePageProps, HomePageState> {
   }
 
   render() {
+
     if (this.state.data === null) {
       return (
         <ThemeProvider theme={theme}>
@@ -125,7 +132,7 @@ class HomePage extends Component<HomePageProps, HomePageState> {
                 </React.Fragment>
               }><Button>JSON</Button></HtmlTooltip>
 
-          Timer: {this.state.time.toISOString()}
+          Timer: {this.props.localTime}
             </Box>
             <Grid container spacing={1}>
               {data?.stats.map((stat) => {
@@ -145,4 +152,4 @@ class HomePage extends Component<HomePageProps, HomePageState> {
   }
 }
 
-export default HomePage;
+export default connector(HomePage);
