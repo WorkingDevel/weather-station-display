@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import { ENV_VARS } from './utils/env';
 import store from './store';
 import { timeSlice } from './store/time/slice';
+import { ActionID } from './store/actions';
 
 function App() {
   useEffect(() => {
@@ -12,6 +13,10 @@ function App() {
     setInterval(() => {
       store.dispatch(timeSlice.actions.setLocalTime(new Date().toISOString()));
     }, 1000);
+    setInterval(() => {
+      store.dispatch({ type: ActionID.FETCH_STATION_DATA_REQUEST });
+    }, 5000);
+
   }, []);
 
   return (

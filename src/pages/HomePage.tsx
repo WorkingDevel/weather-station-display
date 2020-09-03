@@ -6,7 +6,6 @@ import Box from '@material-ui/core/Box';
 import theme from '../styles/theme';
 import { Grid, Tooltip, Button, withStyles, Theme, CssBaseline } from '@material-ui/core';
 import TemperatureDigital from '../components/TemperatureDigital';
-import { SourceDaily } from '../domain/source-json';
 import { ConnectedProps, connect } from 'react-redux';
 import { timeSlice } from '../store/time/slice';
 import { RootState } from '../store';
@@ -15,16 +14,10 @@ interface HomePageProps extends PropsFromRedux {
   dataUrl: URL
 }
 
-type HomePageState = {
-  isLoaded: boolean,
-  lastFetched?: Date,
-  data?: SourceDaily,
-  error?: any,
-}
-
 const mapState = (state: RootState) => ({
   stationTime: state.time.stationTime,
-  localTime: state.time.displayTime
+  localTime: state.time.displayTime,
+  daily: state.stationData.daily
 })
 
 const mapDispatch = {
@@ -47,53 +40,15 @@ const HtmlTooltip = withStyles((theme: Theme) => ({
   },
 }))(Tooltip);
 
-class HomePage extends Component<HomePageProps, HomePageState> {
+class HomePage extends Component<HomePageProps> {
 
-  constructor(props: HomePageProps) {
-    super(props);
-    this.state = {
-      isLoaded: false
-    };
-  }
-
-  componentDidMount() {
-    // need to make the initial call to getData() to populate
-    // data right away
-    this.getData();
-
-    // Now we need to make it run at a specified interval
-    setInterval(() => this.getData(), 60000);
-  }
-
-  getData = () => {
-    // do something to fetch data from a remote API.
-    fetch(this.props.dataUrl.toString())
-      .then(response => response.json())
-      .then(
-        // handle the result
-        (result: SourceDaily) => {
-          console.info(result);
-          this.setState({
-            isLoaded: true,
-            lastFetched: new Date(),
-            data: result
-          });
-        },
-
-        // Handle error
-        (error) => {
-          console.error(error);
-          this.setState({
-            isLoaded: false,
-            error
-          })
-        },
-      )
-  }
+  // constructor(props: HomePageProps) {
+  //   super(props);
+  // }
 
   stateText() {
-    if (this.state.isLoaded) {
-      return JSON.stringify(this.state.data!!, null, 2)
+    if (this.props.daily === null) {
+      return JSON.stringify(this.props.daily!!.data, null, 2)
     } else {
       return "no"
     }
@@ -101,7 +56,7 @@ class HomePage extends Component<HomePageProps, HomePageState> {
 
   render() {
 
-    if (this.state.data === null) {
+    if (this.props.daily === null) {
       return (
         <ThemeProvider theme={theme}>
           <CssBaseline />
@@ -113,7 +68,7 @@ class HomePage extends Component<HomePageProps, HomePageState> {
         </ThemeProvider>
       );
     } else {
-      const data = this.state.data!!
+      const data = this.props.daily.data!!
       return (
         <ThemeProvider theme={theme}>
           <CssBaseline />
@@ -124,7 +79,7 @@ class HomePage extends Component<HomePageProps, HomePageState> {
                 {data?.location}
               </Typography>
               <Typography variant="h6" component="p" gutterBottom>
-                Station Time: {data?.time}, Last Fetch Time: {this.state.lastFetched?.toISOString()}
+                Station Time: {data?.time}, Last Fetch Time: {this.props.daily.lastFetched}
               </Typography>
               <HtmlTooltip title={
                 <React.Fragment>
